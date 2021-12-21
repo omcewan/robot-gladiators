@@ -64,6 +64,10 @@ var fight = function(enemyName){
 
 // function to start game
 var startGame = function(){
+    // reset player stats 
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
     for(var i = 0; i < enemyNames.length; i++){
         if (playerHealth >0) {
             // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
@@ -85,8 +89,29 @@ var startGame = function(){
             break;
         }
     }
-    // startGame();
+    // after the game ends the player is either out of health or enemies to fight, so run the end game function
+    endGame();
+}
 
+// function to end the game entirely
+var endGame = function(){
+    window.alert("The game has ended. Let's see how you did!");
+    // if the player is still alive, player wins!
+    if (playerHealth > 0) {
+        window.alert("Great job, you survived the game! You now have a score of score of " + playerHealth + ".");
+    }
+    else {
+        window.alert("You've lost your robot in battle!");
+    }
+
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+    if (playAgainConfirm){
+        // start the game over
+        startGame();
+    }
+    else {
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+    }
 }
 
 startGame();
@@ -95,3 +120,4 @@ startGame();
 //    * Fight all enemy-robots
 //    * Defeat each enemy-robot
 // "LOSE" - Player robot's health is zero or less
+
